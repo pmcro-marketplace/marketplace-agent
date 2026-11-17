@@ -1,36 +1,49 @@
 ---
 name: creator
-description: Create the narrowest missing marketplace source only after discovery proves a genuine gap.
+description: Marketplace creation subagent that creates a new marketplace catalog/container after discovery proves a genuine gap.
 ---
 # creator
 
 ## Purpose
-Produce a valid marketplace package without duplicating existing marketplace functionality.
+Own `/create-marketplace`: create the marketplace catalog and selected source/container without creating the plugin packages that will later be added to it.
 
 ## When to Use
-Use this capability when it is the narrowest resolved skill for the current request.
+Use for `@marketplace-agent /create-marketplace` after discovery proves the requested marketplace does not already exist in an acceptable form.
 
 ## When Not to Use
-Do not duplicate an existing validated capability, broaden scope silently, or claim execution without evidence.
+Do not author plugin packages. Do not use for adding/removing plugins from an existing marketplace. Do not simulate GitHub repository creation; delegate it to GitHub Agent.
 
 ## Inputs
-A bounded request, resolved target identity, authorization context, and applicable evidence.
+Marketplace name, source type, source location or owner when applicable, visibility when applicable, initial metadata, authorization context, and acceptance criteria.
 
 ## Deliverables
-One concrete result or a BLOCKED/NOT_INVOKED disposition with evidence.
+A created marketplace source/container plus initialized marketplace catalog, or `BLOCKED` / `NOT_INVOKED`.
 
 ## Workflow
-1. Resolve Agent -> Plugin -> Skill -> Function.
-2. Emit the exact functionality before execution.
-3. Invoke the actual available provider or capability.
-4. The installed Hook Agent may autonomously apply applicable lifecycle functions above this target; this skill does not own lifecycle behavior.
-5. Verify the result with evidence.
+1. Confirm discovery evidence proves a real marketplace gap.
+2. Resolve `@marketplace-agent /create-marketplace` -> `/marketplace:creator:create-marketplace`.
+3. Validate `source.type`.
+4. For `github-repository`, delegate repository creation to `@github-agent`; for local or remote sources, use the corresponding authorized provider.
+5. Initialize the marketplace catalog contract in the source/container.
+6. Validate the catalog independently from source creation.
+7. Return the source evidence and catalog evidence.
+8. Hand membership operations back to the `marketplace` subagent.
 
 ## Validation
-A PASS requires actual evidence. A declared path or emitted invocation is not proof of execution.
+Canonical function:
+
+- `/marketplace:creator:create-marketplace`
+
+Supported source types:
+
+- `github-repository`
+- `local-repository`
+- `remote-repository`
+
+A PASS requires both source/container evidence and a valid initialized marketplace catalog.
 
 ## Pitfalls
-Emission is not invocation. Discovery is not authorization. Skills-only packaging does not itself create a runtime tool.
+A repository by itself is not a marketplace. A plugin by itself is not a marketplace. Marketplace Agent creates the catalog; Plugin Agent creates plugin packages.
 
 ## Resources
-See references/contract.md and assets/request.json.
+See `references/contract.md`, `references/creation-contract.md`, `../marketplace/references/catalog-contract.md`, and `assets/request.json`.

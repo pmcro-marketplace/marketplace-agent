@@ -1,36 +1,54 @@
 ---
 name: marketplace
-description: Route marketplace-domain lifecycle work and preserve registration, installation, enablement, validation, authorization, and availability as distinct states.
+description: Marketplace catalog subagent for discovery, source attachment, plugin membership, validation, synchronization, listing, removal, and publication.
 ---
 # marketplace
 
 ## Purpose
-Discover before creating or registering a marketplace.
+Own marketplace catalog state after creation and keep marketplace sources, plugin membership, validation, synchronization, and publication as explicit states.
 
 ## When to Use
-Use this capability when it is the narrowest resolved skill for the current request.
+Use for `/discover`, `/add-source`, `/add-plugin`, `/remove-plugin`, `/list-plugins`, `/validate`, `/sync`, or `/publish`.
 
 ## When Not to Use
-Do not duplicate an existing validated capability, broaden scope silently, or claim execution without evidence.
+Do not author a plugin package; delegate that to Plugin Agent. Do not create a new marketplace container/catalog; route `/create-marketplace` to the `creator` subagent. Do not perform GitHub operations directly when GitHub Agent is available.
 
 ## Inputs
-A bounded request, resolved target identity, authorization context, and applicable evidence.
+A bounded request, marketplace identity, source descriptor, authorization context, current catalog state, and evidence.
+
+For `/add-plugin`, require:
+- `marketplace_ref` — the target marketplace/catalog identity.
+- `plugin_ref` — an existing plugin package identity or resolvable plugin reference.
+- `enabled` — optional desired membership state; defaults to enabled when omitted.
 
 ## Deliverables
-One concrete result or a BLOCKED/NOT_INVOKED disposition with evidence.
+One concrete marketplace state transition or a `BLOCKED` / `NOT_INVOKED` disposition with evidence.
 
 ## Workflow
-1. Resolve Agent -> Plugin -> Skill -> Function.
-2. Emit the exact functionality before execution.
-3. Invoke the actual available provider or capability.
-4. The installed Hook Agent may autonomously apply applicable lifecycle functions above this target; this skill does not own lifecycle behavior.
-5. Verify the result with evidence.
+1. Resolve `@marketplace-agent` -> plugin `marketplace` -> subagent `marketplace` -> concrete function.
+2. Emit the exact function identity.
+3. Preserve source/container state separately from plugin membership state.
+4. Delegate provider-specific operations to the narrowest real provider, such as GitHub Agent for GitHub repository sources.
+5. Apply the marketplace catalog change.
+6. Validate the resulting catalog and membership state.
+7. Return provider evidence plus marketplace evidence.
 
 ## Validation
-A PASS requires actual evidence. A declared path or emitted invocation is not proof of execution.
+Supported identities:
+
+- `/marketplace:marketplace:discover`
+- `/marketplace:marketplace:add-source`
+- `/marketplace:marketplace:add-plugin` — inputs: `marketplace_ref`, `plugin_ref`, optional `enabled`
+- `/marketplace:marketplace:remove-plugin`
+- `/marketplace:marketplace:list-plugins`
+- `/marketplace:marketplace:validate`
+- `/marketplace:marketplace:sync`
+- `/marketplace:marketplace:publish`
+
+A PASS requires actual marketplace/catalog evidence. A repository URL, plugin ID, emitted invocation, or installation alone is insufficient.
 
 ## Pitfalls
-Emission is not invocation. Discovery is not authorization. Skills-only packaging does not itself create a runtime tool.
+Emission is not invocation. Repository creation is not marketplace validation. Plugin creation is not marketplace membership. Membership is not installation. Installation is not execution.
 
 ## Resources
-See references/contract.md and assets/request.json.
+See `references/contract.md`, `references/catalog-contract.md`, `references/source-types.md`, `assets/request.json`, and `assets/marketplace.example.yaml`.
