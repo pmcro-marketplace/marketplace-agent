@@ -2,42 +2,46 @@
 
 Canonical repository: `pmcro-marketplace/marketplace-agent`.
 
-Canonical identity:
+## Identity
 
 ```text
-Agent:  @marketplace-agent
-Plugin: marketplace
+Agent:        @marketplace-agent
+Plugin:       marketplace
+Skill/Subagent:
+  marketplace
+  creator
+Function:     concrete marketplace operation
 ```
 
-Skills are subagents; functions are concrete operations.
+Marketplace Agent owns marketplace catalogs and marketplace membership. It does **not** author plugin packages.
+
+- Plugin Agent creates or updates plugin packages.
+- Marketplace Agent creates the marketplace/catalog and adds existing plugins to it.
+- GitHub Agent performs GitHub repository operations when the marketplace source type is `github-repository`.
+- Hook Agent may surround applicable calls only when a real lifecycle runtime/provider exists.
+
+## Marketplace source types
 
 ```text
-marketplace
-├── skill/subagent: marketplace
-│   ├── discover
-│   ├── register
-│   ├── install
-│   ├── enable
-│   ├── validate
-│   ├── sync
-│   └── publish
-└── skill/subagent: creator
-    └── create
+github-repository
+local-repository
+remote-repository
 ```
 
-Human calls:
+A GitHub repository is a marketplace **source/container type**, not the plugin itself.
+
+## Functions
 
 ```text
+@marketplace-agent /create-marketplace
 @marketplace-agent /discover
-@marketplace-agent /create
-@marketplace-agent /register
-@marketplace-agent /install
-@marketplace-agent /enable
+@marketplace-agent /add-source
+@marketplace-agent /add-plugin
+@marketplace-agent /remove-plugin
+@marketplace-agent /list-plugins
 @marketplace-agent /validate
 @marketplace-agent /sync
 @marketplace-agent /publish
 ```
 
-The installed Hook Agent may surround applicable executions, but it does not replace Marketplace Agent business functionality.
-
-See `INVOCATION.md` for the exact internal capability identities.
+See `INVOCATION.md` for exact internal capability identities and `skills/marketplace/references/catalog-contract.md` for the catalog contract.

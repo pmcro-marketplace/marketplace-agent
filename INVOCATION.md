@@ -2,39 +2,70 @@
 
 Human surface:
 
-`@marketplace-agent /<function> [arguments]`
+```text
+@marketplace-agent /<function> [arguments]
+```
 
 Canonical ownership:
 
 ```text
-Agent: @marketplace-agent
+Agent:  @marketplace-agent
 Plugin: marketplace
-Skill/Subagent: marketplace | creator
-Function: concrete operation
 ```
 
-Concrete functions:
+## Function resolution
 
 ```text
-@marketplace-agent /discover  -> /marketplace:marketplace:discover
-@marketplace-agent /create    -> /marketplace:creator:create
-@marketplace-agent /register  -> /marketplace:marketplace:register
-@marketplace-agent /install   -> /marketplace:marketplace:install
-@marketplace-agent /enable    -> /marketplace:marketplace:enable
-@marketplace-agent /validate  -> /marketplace:marketplace:validate
-@marketplace-agent /sync      -> /marketplace:marketplace:sync
-@marketplace-agent /publish   -> /marketplace:marketplace:publish
+@marketplace-agent /create-marketplace
+  -> /marketplace:creator:create-marketplace
+
+@marketplace-agent /discover
+  -> /marketplace:marketplace:discover
+
+@marketplace-agent /add-source
+  -> /marketplace:marketplace:add-source
+
+@marketplace-agent /add-plugin
+  -> /marketplace:marketplace:add-plugin
+
+@marketplace-agent /remove-plugin
+  -> /marketplace:marketplace:remove-plugin
+
+@marketplace-agent /list-plugins
+  -> /marketplace:marketplace:list-plugins
+
+@marketplace-agent /validate
+  -> /marketplace:marketplace:validate
+
+@marketplace-agent /sync
+  -> /marketplace:marketplace:sync
+
+@marketplace-agent /publish
+  -> /marketplace:marketplace:publish
 ```
 
-Hook Agent is the autonomous lifecycle layer above this plugin when installed and backed by a real runtime adapter.
+## Delegation law
 
-Core flow:
+Marketplace Agent owns the marketplace catalog.
 
-`RESOLVE -> EMIT -> HOOK WHEN ACTUALLY EXECUTABLE -> INVOKE TARGET -> VERIFY -> EVIDENCE`
+It delegates:
+- plugin package creation/update -> `@plugin-agent`
+- GitHub repository creation/read/write -> `@github-agent`
+- lifecycle interception -> `@hook-agent`, only when a real lifecycle provider exists
 
-Marketplace installation, routing, or emitted function names do not prove runtime execution.
+For `source.type = github-repository`, `/create-marketplace` may delegate repository creation to GitHub Agent, then Marketplace Agent writes and validates the marketplace catalog in that repository.
 
-If a lifecycle provider is unavailable, the hook action is `NOT_INVOKED`.
-If the target provider is unavailable or authorization blocks it, return `BLOCKED` or `NOT_INVOKED`.
+## Execution law
 
-**Emission is not invocation.**
+```text
+RESOLVE
+-> EMIT exact function
+-> invoke applicable Hook function only when actually executable
+-> INVOKE real target provider/capability
+-> VERIFY resulting marketplace state
+-> RETURN EVIDENCE
+```
+
+Emission is not invocation.
+A GitHub repository existing does not by itself prove a valid marketplace catalog.
+A plugin package existing does not by itself prove marketplace membership.
