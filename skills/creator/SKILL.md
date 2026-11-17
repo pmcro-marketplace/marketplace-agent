@@ -1,36 +1,42 @@
 ---
 name: creator
-description: Create the narrowest missing marketplace source only after discovery proves a genuine gap.
+description: Marketplace creation subagent that creates the narrowest missing marketplace only after discovery proves a genuine gap.
 ---
 # creator
 
 ## Purpose
-Produce a valid marketplace package without duplicating existing marketplace functionality.
+Own the concrete `/create` function for Marketplace Agent and produce a valid marketplace source/package without duplicating existing marketplace functionality.
 
 ## When to Use
-Use this capability when it is the narrowest resolved skill for the current request.
+Use only for `@marketplace-agent /create` after discovery has proven that the requested marketplace does not already exist in an acceptable form.
 
 ## When Not to Use
-Do not duplicate an existing validated capability, broaden scope silently, or claim execution without evidence.
+Do not use for discovery, registration, installation, enablement, validation, synchronization, or publication. Do not create duplicates or claim creation without provider evidence.
 
 ## Inputs
-A bounded request, resolved target identity, authorization context, and applicable evidence.
+A bounded creation request, desired marketplace identity, discovery evidence proving the gap, authorization context, target provider, and acceptance criteria.
 
 ## Deliverables
-One concrete result or a BLOCKED/NOT_INVOKED disposition with evidence.
+A created marketplace artifact/state change with evidence, or `BLOCKED` / `NOT_INVOKED`.
 
 ## Workflow
-1. Resolve Agent -> Plugin -> Skill -> Function.
-2. Emit the exact functionality before execution.
-3. Invoke the actual available provider or capability.
-4. The installed Hook Agent may autonomously apply applicable lifecycle functions above this target; this skill does not own lifecycle behavior.
-5. Verify the result with evidence.
+1. Confirm discovery evidence proves a real gap.
+2. Resolve `@marketplace-agent /create` -> `/marketplace:creator:create`.
+3. Emit the exact creation functionality before execution.
+4. Allow Hook Agent to surround the target only when a real lifecycle runtime is available.
+5. Invoke the real creator/provider capability.
+6. Verify the created marketplace identity and resulting state.
+7. Hand subsequent lifecycle work back to the `marketplace` subagent.
 
 ## Validation
-A PASS requires actual evidence. A declared path or emitted invocation is not proof of execution.
+Canonical function identity:
+
+- `/marketplace:creator:create`
+
+A PASS requires actual creation evidence from the target provider.
 
 ## Pitfalls
-Emission is not invocation. Discovery is not authorization. Skills-only packaging does not itself create a runtime tool.
+Emission is not invocation. A proposed name, directory, manifest, or route is not proof that a marketplace was created.
 
 ## Resources
-See references/contract.md and assets/request.json.
+See `references/contract.md` and `assets/request.json`.
