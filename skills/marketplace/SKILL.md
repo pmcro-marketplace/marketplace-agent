@@ -1,36 +1,47 @@
 ---
 name: marketplace
-description: Route marketplace-domain lifecycle work and preserve registration, installation, enablement, validation, authorization, and availability as distinct states.
+description: Marketplace lifecycle subagent for discovery, registration, installation, enablement, validation, synchronization, and publication.
 ---
 # marketplace
 
 ## Purpose
-Discover before creating or registering a marketplace.
+Own marketplace lifecycle state and route concrete marketplace functions without conflating discovery, registration, installation, enablement, validation, synchronization, or publication.
 
 ## When to Use
-Use this capability when it is the narrowest resolved skill for the current request.
+Use for `/discover`, `/register`, `/install`, `/enable`, `/validate`, `/sync`, or `/publish`.
 
 ## When Not to Use
-Do not duplicate an existing validated capability, broaden scope silently, or claim execution without evidence.
+Do not create a new marketplace source; route `/create` to the `creator` subagent. Do not duplicate an existing validated capability, broaden scope silently, or claim execution without evidence.
 
 ## Inputs
-A bounded request, resolved target identity, authorization context, and applicable evidence.
+A bounded request, resolved marketplace target, authorization context, current marketplace state, requested function, and applicable evidence.
 
 ## Deliverables
-One concrete result or a BLOCKED/NOT_INVOKED disposition with evidence.
+One concrete lifecycle result or a `BLOCKED` / `NOT_INVOKED` disposition with evidence.
 
 ## Workflow
-1. Resolve Agent -> Plugin -> Skill -> Function.
-2. Emit the exact functionality before execution.
-3. Invoke the actual available provider or capability.
-4. The installed Hook Agent may autonomously apply applicable lifecycle functions above this target; this skill does not own lifecycle behavior.
-5. Verify the result with evidence.
+1. Resolve `@marketplace-agent` -> plugin `marketplace` -> subagent `marketplace` -> concrete function.
+2. Emit the exact function identity before execution.
+3. Preserve distinct marketplace states; do not treat discovery, registration, installation, enablement, or publication as equivalent.
+4. Allow Hook Agent to surround the target only when a real lifecycle runtime is available.
+5. Invoke the real provider or target capability.
+6. Verify the resulting marketplace state with evidence.
 
 ## Validation
-A PASS requires actual evidence. A declared path or emitted invocation is not proof of execution.
+Supported function identities are:
+
+- `/marketplace:marketplace:discover`
+- `/marketplace:marketplace:register`
+- `/marketplace:marketplace:install`
+- `/marketplace:marketplace:enable`
+- `/marketplace:marketplace:validate`
+- `/marketplace:marketplace:sync`
+- `/marketplace:marketplace:publish`
+
+A PASS requires actual evidence. A declared path, emitted invocation, or installed package is not proof of runtime execution.
 
 ## Pitfalls
-Emission is not invocation. Discovery is not authorization. Skills-only packaging does not itself create a runtime tool.
+Emission is not invocation. Discovery is not authorization. Installation is not enablement. Enablement is not execution.
 
 ## Resources
-See references/contract.md and assets/request.json.
+See `references/contract.md` and `assets/request.json`.
