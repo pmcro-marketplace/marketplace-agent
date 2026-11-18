@@ -1,0 +1,32 @@
+name: Marketplace Projection Proof
+
+on:
+  pull_request:
+    paths:
+      - "marketplace.yaml"
+      - "skills/marketplace/**"
+      - "tests/**"
+      - "dist/**"
+      - ".github/workflows/marketplace-projection.yml"
+  push:
+    branches:
+      - "claude/catalog-projection-upgrade"
+
+permissions:
+  contents: read
+
+jobs:
+  projection-proof:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run projection unit tests
+        run: python -m unittest discover -s tests -p "test_catalog_projection.py"
+      - name: Verify generated catalogs are in sync
+        run: python skills/marketplace/scripts/project_catalogs.py --check
