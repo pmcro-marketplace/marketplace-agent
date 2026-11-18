@@ -1,0 +1,128 @@
+{
+  "name": "pmcro-marketplace",
+  "owner": {
+    "name": "PMCR-O AI Agent Company"
+  },
+  "metadata": {
+    "description": "PMCR-O Marketplace"
+  },
+  "plugins": [
+    {
+      "name": "checker",
+      "description": "Independent verification and evidence verdicts.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/checker-agent",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "docker",
+      "description": "Container and Docker lifecycle capabilities.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/docker-agent",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "github",
+      "description": "GitHub repository, branch, pull request, Actions, and synchronization operations.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/github-agent",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "hook",
+      "description": "Lifecycle hook boundaries around real capability execution.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/hook-agent",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "maker",
+      "description": "Authorized artifact creation and capability execution.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/maker-agent",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "marketplace",
+      "description": "Marketplace catalog creation, membership, projection, and publication.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/marketplace-agent",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "orchestrator",
+      "description": "Goal interpretation and global lifecycle routing.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/orchestrator-agent",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "planner",
+      "description": "Bounded planning and acceptance criteria.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/planner-agent",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "plugin",
+      "description": "Plugin discovery, creation, migration, and update routing.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/plugin-agent",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "pmcro",
+      "description": "PMCR-O protocol and bounded lifecycle coordination.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/pmcro-agent",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "reflector",
+      "description": "Lessons, disposition, and next-intent proposal.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/reflector-agent",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "skill",
+      "description": "Skill creation, validation, projection, and quality gates.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/skill-agent",
+        "ref": "main"
+      }
+    },
+    {
+      "name": "template",
+      "description": "Reusable template discovery, authoring, validation, and instantiation.",
+      "source": {
+        "source": "github",
+        "repo": "pmcro-marketplace/template-agent",
+        "ref": "main"
+      }
+    }
+  ]
+}
