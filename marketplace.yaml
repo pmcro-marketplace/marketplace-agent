@@ -1,0 +1,23 @@
+{
+  "kind": "Marketplace",
+  "version": 1,
+  "name": "pmcro-marketplace",
+  "displayName": "PMCR-O Marketplace",
+  "owner": {"name": "PMCR-O AI Agent Company"},
+  "source": {"type": "github-repository", "repository": "pmcro-marketplace/marketplace-agent"},
+  "plugins": [
+    {"name":"pmcro","repository":"pmcro-marketplace/pmcro-agent","description":"PMCR-O protocol and bounded lifecycle coordination.","category":"Developer Tools","enabled":true},
+    {"name":"orchestrator","repository":"pmcro-marketplace/orchestrator-agent","description":"Goal interpretation and global lifecycle routing.","category":"Developer Tools","enabled":true},
+    {"name":"planner","repository":"pmcro-marketplace/planner-agent","description":"Bounded planning and acceptance criteria.","category":"Developer Tools","enabled":true},
+    {"name":"maker","repository":"pmcro-marketplace/maker-agent","description":"Authorized artifact creation and capability execution.","category":"Developer Tools","enabled":true},
+    {"name":"checker","repository":"pmcro-marketplace/checker-agent","description":"Independent verification and evidence verdicts.","category":"Developer Tools","enabled":true},
+    {"name":"reflector","repository":"pmcro-marketplace/reflector-agent","description":"Lessons, disposition, and next-intent proposal.","category":"Developer Tools","enabled":true},
+    {"name":"hook","repository":"pmcro-marketplace/hook-agent","description":"Lifecycle hook boundaries around real capability execution.","category":"Developer Tools","enabled":true},
+    {"name":"skill","repository":"pmcro-marketplace/skill-agent","description":"Skill creation, validation, projection, and quality gates.","category":"Developer Tools","enabled":true},
+    {"name":"plugin","repository":"pmcro-marketplace/plugin-agent","description":"Plugin discovery, creation, migration, and update routing.","category":"Developer Tools","enabled":true},
+    {"name":"marketplace","repository":"pmcro-marketplace/marketplace-agent","description":"Marketplace catalog creation, membership, projection, and publication.","category":"Developer Tools","enabled":true},
+    {"name":"template","repository":"pmcro-marketplace/template-agent","description":"Reusable template discovery, authoring, validation, and instantiation.","category":"Developer Tools","enabled":true},
+    {"name":"github","repository":"pmcro-marketplace/github-agent","description":"GitHub repository, branch, pull request, Actions, and synchronization operations.","category":"Developer Tools","enabled":true},
+    {"name":"docker","repository":"pmcro-marketplace/docker-agent","description":"Container and Docker lifecycle capabilities.","category":"Developer Tools","enabled":true}
+  ]
+}
