@@ -20,6 +20,27 @@ Marketplace Agent owns marketplace catalogs and marketplace membership. It does 
 - GitHub Agent performs GitHub repository operations when the marketplace source type is `github-repository`.
 - Hook Agent may surround applicable calls only when a real lifecycle runtime/provider exists.
 
+## Authored source and generated projections
+
+The root `marketplace.yaml` is the single authored marketplace source. Host compatibility catalogs are generated under `dist/` and must not be edited by hand.
+
+```text
+marketplace.yaml
+  -> dist/.github/plugin/marketplace.json
+  -> dist/.claude-plugin/marketplace.json
+  -> dist/.agents/plugins/marketplace.json
+  -> dist/projection-status.json
+```
+
+Run:
+
+```bash
+python skills/marketplace/scripts/project_catalogs.py
+python skills/marketplace/scripts/project_catalogs.py --check
+```
+
+The projector emits GitHub-source catalogs for Copilot/Claude and Git URL entries with explicit install/auth policy for Codex. Cursor remains explicitly `NOT_REPRESENTABLE` for this cross-repository topology until a matching documented source form is verified.
+
 ## Marketplace source types
 
 ```text
