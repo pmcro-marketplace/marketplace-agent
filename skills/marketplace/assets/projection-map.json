@@ -1,0 +1,10 @@
+{
+  "canonical": "marketplace.yaml",
+  "generatedRoot": "dist",
+  "targets": {
+    "copilot": {"output":"dist/.github/plugin/marketplace.json","representation":"github-source"},
+    "claude": {"output":"dist/.claude-plugin/marketplace.json","representation":"github-source"},
+    "codex": {"output":"dist/.agents/plugins/marketplace.json","representation":"git-url"},
+    "cursor": {"output":null,"representation":"not-representable-cross-repository"}
+  }
+}
