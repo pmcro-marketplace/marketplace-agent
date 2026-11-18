@@ -1,0 +1,177 @@
+{
+  "name": "pmcro-marketplace",
+  "interface": {
+    "displayName": "PMCR-O Marketplace"
+  },
+  "plugins": [
+    {
+      "name": "checker",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/checker-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "docker",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/docker-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "github",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/github-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "hook",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/hook-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "maker",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/maker-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "marketplace",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/marketplace-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "orchestrator",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/orchestrator-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "planner",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/planner-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "plugin",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/plugin-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "pmcro",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/pmcro-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "reflector",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/reflector-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "skill",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/skill-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "template",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/pmcro-marketplace/template-agent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
