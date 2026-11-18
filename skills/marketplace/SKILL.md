@@ -1,6 +1,6 @@
 ---
 name: marketplace
-description: Marketplace catalog subagent for discovery, source attachment, plugin membership, validation, synchronization, listing, removal, and publication.
+description: "Discover, validate, and resolve marketplace catalog routes or manage plugin membership. Use for marketplace inventory, sync, or publication requests; do not author plugin packages or create marketplace containers."
 ---
 # marketplace
 
@@ -34,9 +34,16 @@ One concrete marketplace state transition or a `BLOCKED` / `NOT_INVOKED` disposi
 7. Return provider evidence plus marketplace evidence.
 
 ## Validation
+For the standalone PMCR-O catalogs:
+
+- Run `python3 -B scripts/validate_catalogs.py --catalog-root /absolute/workspace` to check catalog shape. Use `--require-resolution` only when every enabled dependency must resolve.
+- Run `python3 -B scripts/resolve.py discover --catalog-root /absolute/workspace` to list exact routes. For `/marketplace:marketplace:resolve`, follow `references/standalone-runbook.md` before supplying a provider checkout or execution grant. `scripts/read_adapters.py` and `scripts/trail.py` support the resolver; do not call them directly.
+- Run `scripts/catalog_cycle.py` as described in the runbook for one correlated catalog-only acceptance cycle, not a provider or host invocation.
+
 Supported identities:
 
 - `/marketplace:marketplace:discover`
+- `/marketplace:marketplace:resolve`
 - `/marketplace:marketplace:add-source`
 - `/marketplace:marketplace:add-plugin` — inputs: `marketplace_ref`, `plugin_ref`, optional `enabled`
 - `/marketplace:marketplace:remove-plugin`
@@ -51,4 +58,4 @@ A PASS requires actual marketplace/catalog evidence. A repository URL, plugin ID
 Emission is not invocation. Repository creation is not marketplace validation. Plugin creation is not marketplace membership. Membership is not installation. Installation is not execution.
 
 ## Resources
-See `references/contract.md`, `references/catalog-contract.md`, `references/source-types.md`, `assets/request.json`, and `assets/marketplace.example.yaml`.
+Read `references/contract.md` and `assets/request.json` before a membership change. Use `references/catalog-contract.md`, `references/source-types.md`, and `assets/marketplace.example.yaml` when checking a source or catalog example. Run `scripts/validate.py` for the bundled membership fixture.

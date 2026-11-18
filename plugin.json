@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "marketplace",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Create and manage marketplace catalogs whose sources may be GitHub repositories, local repositories, or remote repositories; add existing plugins to those marketplaces; validate, synchronize, and publish marketplace state under PMCR-O governance.",
   "author": {
     "name": "Planner Agent"

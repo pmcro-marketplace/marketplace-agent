@@ -1,11 +1,14 @@
 ---
 name: creator
-description: Marketplace creation subagent that creates a new marketplace catalog/container after discovery proves a genuine gap.
+description: "Create a marketplace catalog after discovery proves a gap, or scaffold the four PMCR-O catalog folders in an existing workspace. Do not author plugin packages, attach membership, or publish repositories."
 ---
 # creator
 
 ## Purpose
-Own `/create-marketplace`: create the marketplace catalog and selected source/container without creating the plugin packages that will later be added to it.
+Own `/create-marketplace` and `/setup`: create marketplace catalog state without creating the plugin packages that will later be added to it.
+
+## Local scaffold
+For `/marketplace:creator:setup`, run `python3 -B scripts/setup_marketplaces.py --target /absolute/workspace` from the skill directory. The workspace must already exist and be under the operator's exclusive control. Read `assets/setup-plan.json` before changing the reviewed member set. Preview has no effect; add `--apply` only for authorized creation in a workspace without a `marketplaces/` directory. An existing destination is never overwritten. If interrupted, inspect leftovers before retrying.
 
 ## When to Use
 Use for `@marketplace-agent /create-marketplace` after discovery proves the requested marketplace does not already exist in an acceptable form.
@@ -46,4 +49,4 @@ A PASS requires both source/container evidence and a valid initialized marketpla
 A repository by itself is not a marketplace. A plugin by itself is not a marketplace. Marketplace Agent creates the catalog; Plugin Agent creates plugin packages.
 
 ## Resources
-See `references/contract.md`, `references/creation-contract.md`, `../marketplace/references/catalog-contract.md`, and `assets/request.json`.
+Use `references/creation-contract.md` and `../marketplace/references/catalog-contract.md` when selecting a source. Use `references/contract.md` and `assets/request.json` to construct a `/create-marketplace` request. Run `scripts/validate.py` for the bundled creation fixture.

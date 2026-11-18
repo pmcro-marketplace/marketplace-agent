@@ -19,8 +19,14 @@ Plugin: marketplace
 @marketplace-agent /create-marketplace
   -> /marketplace:creator:create-marketplace
 
+@marketplace-agent /setup
+  -> /marketplace:creator:setup
+
 @marketplace-agent /discover
   -> /marketplace:marketplace:discover
+
+@marketplace-agent /resolve
+  -> /marketplace:marketplace:resolve
 
 @marketplace-agent /add-source
   -> /marketplace:marketplace:add-source

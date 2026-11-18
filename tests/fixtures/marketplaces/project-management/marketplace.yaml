@@ -1,0 +1,61 @@
+{
+  "kind": "Marketplace",
+  "version": 1,
+  "name": "project-management",
+  "source": {
+    "type": "github-repository",
+    "repository": "pmcro-marketplace/Everything-as-Agent",
+    "path": "marketplaces/project-management/marketplace.yaml"
+  },
+  "plugins": [
+    {
+      "name": "projects",
+      "agent": "project-agent",
+      "source": {
+        "type": "github-plugin",
+        "repository": "shawn2024bellazan-prog/agent-skills",
+        "ref": "34f893fbdd9243a1e55d46e8a04d57a7d5ca1ba1",
+        "path": "plugins/projects"
+      },
+      "skills": [
+        "project-lifecycle",
+        "manage-auto-memory"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "dotagents",
+      "agent": "dotagents-agent",
+      "source": {
+        "type": "github-plugin",
+        "repository": "shawn2024bellazan-prog/agent-skills",
+        "ref": "34f893fbdd9243a1e55d46e8a04d57a7d5ca1ba1",
+        "path": "plugins/dotagents"
+      },
+      "skills": [
+        "init",
+        "install",
+        "add",
+        "remove",
+        "sync",
+        "mcp",
+        "trust",
+        "doctor",
+        "list"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "project",
+      "agent": "project-agent",
+      "source": {
+        "type": "installed-plugin",
+        "name": "project"
+      },
+      "skills": [
+        "project"
+      ],
+      "enabled": true
+    }
+  ]
+}

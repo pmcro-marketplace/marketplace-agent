@@ -1,0 +1,27 @@
+{
+  "kind": "Marketplace",
+  "version": 1,
+  "name": "template-generation",
+  "source": {
+    "type": "github-repository",
+    "repository": "pmcro-marketplace/Everything-as-Agent",
+    "path": "marketplaces/template-generation/marketplace.yaml"
+  },
+  "plugins": [
+    {
+      "name": "template",
+      "agent": "template-agent",
+      "source": {
+        "type": "github-plugin",
+        "repository": "pmcro-marketplace/template-agent",
+        "ref": "bb3ea4ebcf9e004f43bf655629cfa34b40e45523",
+        "path": "."
+      },
+      "skills": [
+        "template",
+        "creator"
+      ],
+      "enabled": true
+    }
+  ]
+}

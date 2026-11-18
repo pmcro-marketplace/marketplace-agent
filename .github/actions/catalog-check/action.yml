@@ -1,0 +1,29 @@
+name: PMCR-O Marketplace Catalog Check
+description: Run the standalone catalog cycle and reopen its private trail
+outputs:
+  trail-id:
+    description: Correlation ID from the reopened catalog trail
+    value: ${{ steps.catalog.outputs.trail-id }}
+runs:
+  using: composite
+  steps:
+    - name: Build, validate and discover the catalog fixture
+      id: catalog
+      shell: bash
+      env:
+        MARKETPLACE_ACTION_PATH: ${{ github.action_path }}
+      run: |
+        set -euo pipefail
+        umask 077
+        export HOME="$(mktemp -d "$RUNNER_TEMP/pmcro-marketplace-home.XXXXXX")"
+        mkdir -p "$HOME/.pmcro/projects/catalog-ci"
+        script="$MARKETPLACE_ACTION_PATH/../../../skills/marketplace/scripts/catalog_cycle.py"
+        result="$(python3 -B "$script" run --project-id catalog-ci)"
+        trail_id="$(printf '%s' "$result" | python3 -c 'import json,sys; print(json.load(sys.stdin)["trail_id"])')"
+        receipt="$(python3 -B "$script" verify --project-id catalog-ci --trail-id "$trail_id")"
+        printf 'trail-id=%s\n' "$trail_id" >> "$GITHUB_OUTPUT"
+        {
+          printf '### PMCR-O Checker and Reflector: catalog-only\n\n'
+          printf '```json\n%s\n```\n\n' "$receipt"
+          printf 'Raw trail frames stay private in the runner. This is not a GitHub approval.\n'
+        } >> "$GITHUB_STEP_SUMMARY"

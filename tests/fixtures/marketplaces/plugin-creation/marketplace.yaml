@@ -1,0 +1,55 @@
+{
+  "kind": "Marketplace",
+  "version": 1,
+  "name": "plugin-creation",
+  "source": {
+    "type": "github-repository",
+    "repository": "pmcro-marketplace/Everything-as-Agent",
+    "path": "marketplaces/plugin-creation/marketplace.yaml"
+  },
+  "plugins": [
+    {
+      "name": "plugin",
+      "agent": "plugin-agent",
+      "source": {
+        "type": "github-plugin",
+        "repository": "pmcro-marketplace/plugin-agent",
+        "ref": "dd4e1523e70529ec063d83f97e8c4a43d70fbbc4",
+        "path": "."
+      },
+      "skills": [
+        "plugin",
+        "create-domain",
+        "update"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "plugin-creator",
+      "agent": "plugin-agent",
+      "source": {
+        "type": "installed-plugin",
+        "name": "plugin-creator"
+      },
+      "skills": [
+        "create-plugin",
+        "update-plugin"
+      ],
+      "enabled": true
+    },
+    {
+      "name": "skill-creator",
+      "agent": "skill-agent",
+      "source": {
+        "type": "github-plugin",
+        "repository": "shawn2024bellazan-prog/agent-skills",
+        "ref": "34f893fbdd9243a1e55d46e8a04d57a7d5ca1ba1",
+        "path": "plugins/skill-creator"
+      },
+      "skills": [
+        "create-skill"
+      ],
+      "enabled": true
+    }
+  ]
+}
