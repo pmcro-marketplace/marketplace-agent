@@ -1,0 +1,32 @@
+{
+    "$schema":  "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+    "name":  "marketplace",
+    "version":  "0.3.0",
+    "description":  "Create and manage marketplace catalogs whose sources may be GitHub repositories, local repositories, or remote repositories; add existing plugins to those marketplaces; validate, synchronize, and publish marketplace state under PMCR-O governance.",
+    "author":  {
+                   "name":  "Planner Agent"
+               },
+    "keywords":  [
+                     "pmcro",
+                     "marketplace",
+                     "plugin",
+                     "catalog",
+                     "github",
+                     "agent"
+                 ],
+    "extensions":  {
+                       "com.openai":  {
+                                          "interface":  {
+                                                            "displayName":  "Marketplace Agent",
+                                                            "shortDescription":  "Create and manage marketplaces",
+                                                            "longDescription":  "Create and manage marketplace catalogs whose sources may be GitHub repositories, local repositories, or remote repositories; add existing plugins to those marketplaces; validate, synchronize, and publish marketplace state under PMCR-O governance.",
+                                                            "developerName":  "Planner Agent",
+                                                            "category":  "Developer Tools",
+                                                            "capabilities":  [
+
+                                                                             ],
+                                                            "defaultPrompt":  "For every actionable marketplace request, resolve Agent -\u003e Plugin -\u003e Skill/Subagent -\u003e Function. Marketplace Agent owns marketplace catalogs and membership, not plugin authoring. Use Plugin Agent to create plugin packages and GitHub Agent for GitHub repository operations. When Hook Agent is actually executable, it may surround target execution. Emission, installation, registration, enablement, and execution are distinct states."
+                                                        }
+                                      }
+                   }
+}

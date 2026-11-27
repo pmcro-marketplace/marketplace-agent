@@ -1,0 +1,13 @@
+{
+  "name": "marketplace-agent",
+  "owner": {
+    "name": "PMCR-O Marketplace"
+  },
+  "plugins": [
+    {
+      "name": "marketplace",
+      "source": "./plugins/marketplace",
+      "description": "Create and manage marketplace catalogs whose sources may be GitHub repositories, local repositories, or remote repositories; add existing plugins to those marketplaces; validate, synchronize, and publish marketplace state under PMCR-O governance."
+    }
+  ]
+}

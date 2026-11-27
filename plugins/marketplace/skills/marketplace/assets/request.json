@@ -1,0 +1,11 @@
+{
+  "kind": "CapabilityRequest",
+  "agent": "marketplace-agent",
+  "plugin": "marketplace",
+  "skill": "marketplace",
+  "function": "add-plugin",
+  "status": "proposed",
+  "marketplace_ref": "example-marketplace",
+  "plugin_ref": "plugins_example",
+  "enabled": true
+}
