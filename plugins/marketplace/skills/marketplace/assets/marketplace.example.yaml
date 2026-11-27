@@ -1,0 +1,11 @@
+kind: Marketplace
+version: 1
+name: example-marketplace
+source:
+  type: github-repository
+  repository: pmcro-marketplace/example-marketplace
+plugins:
+  - name: hook
+    agent: hook-agent
+    plugin_id: plugins_example
+    enabled: true
